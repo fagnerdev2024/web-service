@@ -1,5 +1,6 @@
 package com.fagnerdev.web_service.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +8,13 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "tb_user")
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class User implements Serializable {
 
@@ -30,14 +33,18 @@ public class User implements Serializable {
 
     private String password;
 
-    /*@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
-    private List<Order> orders = new ArrayList<>();*/
+    private List<Order> orders = new ArrayList<>();
 
 
 
-
-
-
+    public User(Long id, String name, String email, String phone, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 }
 
