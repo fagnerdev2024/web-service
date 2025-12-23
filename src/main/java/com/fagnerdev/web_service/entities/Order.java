@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order")
@@ -32,9 +31,20 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
+
+
     /*@OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;*/
+
+
+
+    public Order(Long id, Instant moment, User user) {
+        this.id = id;
+        this.moment = moment;
+        this.client = user;
+    }
+
 }
