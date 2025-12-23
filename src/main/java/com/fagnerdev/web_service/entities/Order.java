@@ -1,17 +1,14 @@
 package com.fagnerdev.web_service.entities;
 
+import com.fagnerdev.web_service.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 
-@Data
-@NoArgsConstructor
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
@@ -19,6 +16,7 @@ public class Order implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +29,8 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
+    private Integer orderStatus;
+
 
 
     /*@OneToMany(mappedBy = "id.order")
@@ -41,10 +41,45 @@ public class Order implements Serializable {
 
 
 
-    public Order(Long id, Instant moment, User user) {
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
+        super();
         this.id = id;
         this.moment = moment;
-        this.client = user;
+        this.client = client;
+        setOrderStatus(orderStatus);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getMoment() {
+        return moment;
+    }
+
+    public void setMoment(Instant moment) {
+        this.moment = moment;
+    }
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
+    }
 }
