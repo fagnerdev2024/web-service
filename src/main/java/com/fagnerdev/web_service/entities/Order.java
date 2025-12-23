@@ -40,6 +40,9 @@ public class Order implements Serializable {
     private Payment payment;*/
 
 
+    public Order() {
+    }
+
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         super();
