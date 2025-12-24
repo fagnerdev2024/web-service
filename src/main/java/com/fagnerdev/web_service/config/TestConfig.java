@@ -1,14 +1,8 @@
 package com.fagnerdev.web_service.config;
 
-import com.fagnerdev.web_service.entities.Category;
-import com.fagnerdev.web_service.entities.Order;
-import com.fagnerdev.web_service.entities.Product;
-import com.fagnerdev.web_service.entities.User;
+import com.fagnerdev.web_service.entities.*;
 import com.fagnerdev.web_service.entities.enums.OrderStatus;
-import com.fagnerdev.web_service.repositories.CategoryRepository;
-import com.fagnerdev.web_service.repositories.OrderRepository;
-import com.fagnerdev.web_service.repositories.ProductRepository;
-import com.fagnerdev.web_service.repositories.UserRepository;
+import com.fagnerdev.web_service.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -29,11 +23,14 @@ public class TestConfig implements CommandLineRunner {
 
     private final ProductRepository productRepository;
 
-    public TestConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository) {
+    private final OrderItemRepository orderItemRepository;
+
+    public TestConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository, OrderItemRepository orderItemRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
+        this.orderItemRepository = orderItemRepository;
     }
 
     @Override
@@ -71,6 +68,13 @@ public class TestConfig implements CommandLineRunner {
         Order order2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.DELIVERED, user2);
         Order order3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.SHIPPED, user1);
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+
+        OrderItem orderItem1 = new OrderItem(order1, product1, 2, product1.getPrice());
+        OrderItem orderItem2 = new OrderItem(order1, product3, 1, product3.getPrice());
+        OrderItem orderItem3 = new OrderItem(order2, product3, 2, product3.getPrice());
+        OrderItem orderItem4 = new OrderItem(order3, product5, 2, product5.getPrice());
+        orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
+        orderRepository.save(order1);
 
 
 
