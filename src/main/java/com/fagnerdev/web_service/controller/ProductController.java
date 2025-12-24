@@ -2,7 +2,6 @@ package com.fagnerdev.web_service.controller;
 
 import com.fagnerdev.web_service.entities.Product;
 import com.fagnerdev.web_service.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,17 +14,21 @@ import java.util.List;
 @RequestMapping(value = "/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
+    public ResponseEntity<List<Product>> buscarTodos() {
         List<Product> list = productService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Long id) {
+    public ResponseEntity<Product> buscarPorId(@PathVariable Long id) {
         Product product = productService.findById(id);
         return ResponseEntity.ok().body(product);
     }
