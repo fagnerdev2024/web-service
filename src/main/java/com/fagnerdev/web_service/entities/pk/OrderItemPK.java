@@ -26,12 +26,15 @@ public class OrderItemPK implements Serializable {
     public Order getOrder() {
         return order;
     }
+
     public void setOrder(Order order) {
         this.order = order;
     }
+
     public Product getProduct() {
         return product;
     }
+
     public void setProduct(Product product) {
         this.product = product;
     }
@@ -40,30 +43,29 @@ public class OrderItemPK implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((order == null) ? 0 : order.hashCode());
-        result = prime * result + ((product == null) ? 0 : product.hashCode());
+        result = prime * result + ((order == null || order.getId() == null) ? 0 : order.getId().hashCode());
+        result = prime * result + ((product == null || product.getId() == null) ? 0 : product.getId().hashCode());
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (!(obj instanceof OrderItemPK)) return false;
         OrderItemPK other = (OrderItemPK) obj;
-        if (order == null) {
-            if (other.order != null)
-                return false;
-        } else if (!order.equals(other.order))
+
+        if (order == null || order.getId() == null) {
+            if (other.order != null && other.order.getId() != null) return false;
+        } else if (!order.getId().equals(other.order.getId())) {
             return false;
-        if (product == null) {
-            if (other.product != null)
-                return false;
-        } else if (!product.equals(other.product))
+        }
+
+        if (product == null || product.getId() == null) {
+            if (other.product != null && other.product.getId() != null) return false;
+        } else if (!product.getId().equals(other.product.getId())) {
             return false;
+        }
+
         return true;
     }
 }
