@@ -1,31 +1,31 @@
 package com.fagnerdev.web_service.services;
 
-import com.fagnerdev.web_service.entities.User;
-import com.fagnerdev.web_service.repositories.UserRepository;
+import com.fagnerdev.web_service.entities.Cliente;
+import com.fagnerdev.web_service.repositories.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class ClienteService {
 
 
-    private final UserRepository userRepository;
+    private final ClienteRepository clienteRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
     }
 
 
 
-    public List<User> buscar() {
-        return userRepository.findAll();
+    public List<Cliente> buscar() {
+        return clienteRepository.findAll();
     }
 
 
-    public User findById(Long id) {
-        Optional<User> obj = userRepository.findById(id);
+    public Cliente findById(Long id) {
+        Optional<Cliente> obj = clienteRepository.findById(id);
         return obj.get();
         //return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }

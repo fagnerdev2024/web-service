@@ -1,13 +1,12 @@
 package com.fagnerdev.web_service.dto;
 
-import com.fagnerdev.web_service.entities.User;
-
+import com.fagnerdev.web_service.entities.Cliente;
 
 
 public record UserDTO(Long id, String name, String email, String phone) {
 
-    public UserDTO(User user) {
-        this(user.getId(), user.getName(), user.getEmail(), user.getPhone());
+    public UserDTO(Cliente cliente) {
+        this(cliente.getId(), cliente.getNome(), cliente.getEmail(), cliente.getTelefone());
     }
 }
 

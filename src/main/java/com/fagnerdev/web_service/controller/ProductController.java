@@ -1,7 +1,7 @@
 package com.fagnerdev.web_service.controller;
 
-import com.fagnerdev.web_service.entities.Product;
-import com.fagnerdev.web_service.services.ProductService;
+import com.fagnerdev.web_service.entities.Produto;
+import com.fagnerdev.web_service.services.ProdutosService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/produtos")
 public class ProductController {
 
 
-    private final ProductService productService;
+    private final ProdutosService produtosService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public ProductController(ProdutosService produtosService) {
+        this.produtosService = produtosService;
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> buscarTodos() {
-        List<Product> list = productService.findAll();
+    public ResponseEntity<List<Produto>> buscarTodos() {
+        List<Produto> list = produtosService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> buscarPorId(@PathVariable Long id) {
-        Product product = productService.findById(id);
-        return ResponseEntity.ok().body(product);
+    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
+        Produto produto = produtosService.findById(id);
+        return ResponseEntity.ok().body(produto);
     }
 }

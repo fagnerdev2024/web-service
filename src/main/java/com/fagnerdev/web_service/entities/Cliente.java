@@ -11,9 +11,9 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_cliente")
 
-public class User implements Serializable {
+public class Cliente implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -22,29 +22,29 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nome;
 
     private String email;
 
-    private String phone;
+    private String telefone;
 
-    private String password;
+    private String senha;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "client")
-    private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
 
-    public User() {
+    public Cliente() {
     }
 
 
-    public User(Long id, String name, String email, String phone, String password) {
+    public Cliente(Long id, String nome, String email, String telefone, String senha) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.email = email;
-        this.phone = phone;
-        this.password = password;
+        this.telefone = telefone;
+        this.senha = senha;
     }
 
     public Long getId() {
@@ -55,12 +55,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -71,31 +71,31 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<Pedido> getOrders() {
+        return pedidos;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id);
     }
 
     @Override

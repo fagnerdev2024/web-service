@@ -15,66 +15,66 @@ import java.util.Arrays;
 public class TestConfig implements CommandLineRunner {
 
 
-    private final UserRepository userRepository;
+    private final ClienteRepository clienteRepository;
 
-    private final OrderRepository orderRepository;
+    private final PedidosRepository pedidosRepository;
 
-    private final CategoryRepository categoryRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    private final ProductRepository productRepository;
+    private final ProdutoRepository produtoRepository;
 
     private final OrderItemRepository orderItemRepository;
 
-    public TestConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository, OrderItemRepository orderItemRepository) {
-        this.userRepository = userRepository;
-        this.orderRepository = orderRepository;
-        this.categoryRepository = categoryRepository;
-        this.productRepository = productRepository;
+    public TestConfig(ClienteRepository clienteRepository, PedidosRepository pedidosRepository, CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository, OrderItemRepository orderItemRepository) {
+        this.clienteRepository = clienteRepository;
+        this.pedidosRepository = pedidosRepository;
+        this.categoriaRepository = categoriaRepository;
+        this.produtoRepository = produtoRepository;
         this.orderItemRepository = orderItemRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        Category category1  = new Category(null, "Electronics");
-        Category category2 = new Category(null, "Books");
-        Category category3 = new Category(null, "Computers");
-        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+        Categoria categoria1 = new Categoria(null, "Electronics");
+        Categoria categoria2 = new Categoria(null, "Books");
+        Categoria categoria3 = new Categoria(null, "Computers");
+        categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3));
 
 
-        Product product1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
-        Product product2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
-        Product product3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
-        Product product4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
-        Product product5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
-        productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
+        Produto produto1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Produto produto2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Produto produto3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Produto produto4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Produto produto5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+        produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5));
 
 
-        product1.getCategories().add(category2);
-        product2.getCategories().add(category1);
-        product2.getCategories().add(category3);
-        product3.getCategories().add(category3);
-        product4.getCategories().add(category3);
-        product5.getCategories().add(category2);
-        productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
+        produto1.getCategorias().add(categoria2);
+        produto2.getCategorias().add(categoria1);
+        produto2.getCategorias().add(categoria3);
+        produto3.getCategorias().add(categoria3);
+        produto4.getCategorias().add(categoria3);
+        produto5.getCategorias().add(categoria2);
+        produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5));
 
 
-        User user1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
-        User user2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
-        userRepository.saveAll(Arrays.asList(user1, user2));
+        Cliente cliente1 = new Cliente(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
+        Cliente cliente2 = new Cliente(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
+        clienteRepository.saveAll(Arrays.asList(cliente1, cliente2));
 
 
-        Order order1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, user2);
-        Order order2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.DELIVERED, user2);
-        Order order3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.SHIPPED, user1);
-        orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+        Pedido pedido1 = new Pedido(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, cliente2);
+        Pedido pedido2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.DELIVERED, cliente2);
+        Pedido pedido3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.SHIPPED, cliente1);
+        pedidosRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));
 
-        OrderItem orderItem1 = new OrderItem(order1, product1, 2, product1.getPrice());
-        OrderItem orderItem2 = new OrderItem(order1, product3, 1, product3.getPrice());
-        OrderItem orderItem3 = new OrderItem(order2, product3, 2, product3.getPrice());
-        OrderItem orderItem4 = new OrderItem(order3, product5, 2, product5.getPrice());
-        orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
-        orderRepository.save(order1);
+        ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 2, produto1.getPreco());
+        ItemPedido itemPedido2 = new ItemPedido(pedido1, produto3, 1, produto3.getPreco());
+        ItemPedido itemPedido3 = new ItemPedido(pedido2, produto3, 2, produto3.getPreco());
+        ItemPedido itemPedido4 = new ItemPedido(pedido3, produto5, 2, produto5.getPreco());
+        orderItemRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3, itemPedido4));
+        pedidosRepository.save(pedido1);
 
 
 

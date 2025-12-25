@@ -1,10 +1,10 @@
 package com.fagnerdev.web_service.repositories;
 
-import com.fagnerdev.web_service.entities.Product;
+import com.fagnerdev.web_service.entities.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
 }

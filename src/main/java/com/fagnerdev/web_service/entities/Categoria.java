@@ -13,8 +13,8 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "tb_category")
-public class Category implements Serializable {
+@Table(name = "tb_categoria")
+public class Categoria implements Serializable {
 
 
     @Serial
@@ -24,21 +24,21 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nome;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "categories")
-    private Set<Product> products = new HashSet<>();
+    @ManyToMany(mappedBy = "categorias")
+    private Set<Produto> produtos = new HashSet<>();
 
 
 
-    public Category() {
+    public Categoria() {
     }
 
-    public Category(Long id, String name) {
+    public Categoria(Long id, String nome) {
         super();
         this.id = id;
-        this.name = name;
+        this.nome = nome;
     }
 
 
@@ -50,23 +50,23 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Set<Produto> getProdutos() {
+        return produtos;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id);
+        Categoria categoria = (Categoria) o;
+        return Objects.equals(id, categoria.id);
     }
 
     @Override
