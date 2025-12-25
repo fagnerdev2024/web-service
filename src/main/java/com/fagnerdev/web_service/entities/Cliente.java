@@ -87,7 +87,7 @@ public class Cliente implements Serializable {
         this.senha = senha;
     }
 
-    public List<Pedido> getOrders() {
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
 
@@ -102,6 +102,7 @@ public class Cliente implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
 
 
